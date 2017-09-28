@@ -19,3 +19,11 @@ plugins:
 
 jobs:
   - books-service
+#
+#my_jenkins_plugins:
+#  token-macro:
+#    enabled: yes
+#  build-pipeline-plugin:
+#    version: "1.4.9"
+#    pinned: no
+#    enabled: yes

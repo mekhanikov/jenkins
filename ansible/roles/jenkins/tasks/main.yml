@@ -56,10 +56,18 @@
   with_items: "{{ jobs }}"
   tags: [jenkins]
 
+
+- name: Clean artifact path
+  file:
+    state: absent
+    path: "/data/jenkins/"
+
 - name: Container is running
   docker_container:
-    name=jenkins
-    image=jenkins:1.642.4
-    ports=8080:8080
-    volumes=/data/jenkins:/var/jenkins_home
+    name: jenkins
+    image: jenkins
+#    ports: 8080:8080
+#    volumes: /data/jenkins:/var/jenkins_home
+    state: started
+    restart: yes
   tags: [jenkins]
