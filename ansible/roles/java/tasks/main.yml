@@ -1,6 +1,6 @@
 - name: Package are present
   apt:
-    name=openjdk-7-jdk
+    name=openjdk-8-jdk
     state=present
   with_items: packages
   tags: [java]
