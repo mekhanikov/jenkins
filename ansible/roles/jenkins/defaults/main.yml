@@ -64,11 +64,11 @@ jenkins_plugins:
   github:
     version: "1.28.0"
 #    enabled: yes
-  github-branch-source:
-    version: "2.2.3"
-#    enabled: yes
-  multi-branch-project-plugin:
-    version: "0.7"
+#  github-branch-source:
+#    version: "2.2.3"
+##    enabled: yes
+  workflow-multibranch:
+    version: "2.16"
 #    enabled: yes
 
 jenkins_plugins_state: present
