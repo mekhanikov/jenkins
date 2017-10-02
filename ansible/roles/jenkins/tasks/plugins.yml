@@ -29,6 +29,7 @@
     name: "{{ item }}"
     jenkins_home: "{{ jenkins_home }}"
     params:
+      timeout: 300
       url_username: "{{ jenkins_admin_username }}"
       url_password: "{{ jenkins_admin_password }}"
     state: "{{ jenkins_plugins_state }}"

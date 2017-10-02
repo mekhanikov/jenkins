@@ -34,6 +34,8 @@
   apt:
     deb: "/tmp/jenkins_{{ jenkins_version }}_all.deb"
     state: installed
+    autoremove: true
+    force: true
   when: jenkins_version is defined and specific_version.stat.exists
   notify: configure default users
 

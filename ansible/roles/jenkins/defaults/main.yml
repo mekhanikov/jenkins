@@ -39,7 +39,7 @@ jobs:
 
 # Optional method of pinning a specific version of Jenkins and/or overriding the
 # default Jenkins packaging URL.
-# jenkins_version: "1.644"
+jenkins_version: "2.82"
 # jenkins_pkg_url: "https://www.example.com"
 
 # Change this to `latest` to update Jenkins if a newer version is available.
@@ -70,10 +70,10 @@ jenkins_plugin_updates_expiration: 86400
 jenkins_plugin_timeout: 30
 
 jenkins_admin_username: admin
-jenkins_admin_password:
+jenkins_admin_password: admin
 jenkins_admin_password_file: ""
-jenkins_admin_token: "a4e0876fd6f745f482b123055ac0d801"
-jenkins_admin_token_file: "/var/lib/jenkins/secrets/initialAdminPassword"
+jenkins_admin_token: ""
+jenkins_admin_token_file: ""
 
 jenkins_process_user: jenkins
 jenkins_process_group: "{{ jenkins_process_user }}"
@@ -83,3 +83,11 @@ jenkins_init_changes:
     value: "--prefix={{ jenkins_url_prefix }}"
   - option: "{{ jenkins_java_options_env_var }}"
     value: "{{ jenkins_java_options }}"
+
+#jenkins_admin_token: "{{ lookup('file', '/var/lib/jenkins/secrets/initialAdminPassword') }}"
+
+jenkins_ssh_key_file: "/home/ev/.ssh/id_rsa_jenkins_github"
+
+jenkins_ssh_fingerprints:                   # Set known hosts for ssh
+  - "bitbucket.org,131.103.20.167 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw=="
+  - "github.com,204.232.175.90 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
