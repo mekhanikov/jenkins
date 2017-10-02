@@ -43,6 +43,7 @@
   jenkins_plugin:
     name: "{{ item }}"
     params:
+      timeout: 300
       url_username: admin
       url_password: "{{ jenkins_admin_token }}"
     updates_expiration: "{{ jenkins_plugin_updates_expiration }}"
@@ -50,3 +51,9 @@
   with_items: "{{ jenkins_plugins }}"
   when: jenkins_admin_token != ""
   notify: restart jenkins
+
+
+#- name: Restart Jenkins if required
+#  service:
+#    name: jenkins
+#    state: restarted

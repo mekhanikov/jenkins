@@ -61,7 +61,9 @@ jenkins_plugins:
     version: "1.5.7.1"
     pinned: no
     enabled: yes
-
+  github:
+    version: "1.28.0"
+#    enabled: yes
 
 jenkins_plugins_state: present
 jenkins_plugin_updates_expiration: 86400
