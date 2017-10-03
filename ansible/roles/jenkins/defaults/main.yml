@@ -67,9 +67,11 @@ jenkins_plugins:
 #  github-branch-source:
 #    version: "2.2.3"
 ##    enabled: yes
-  workflow-multibranch:
-    version: "2.16"
+#  workflow-multibranch:
+#    version: "2.16"
 #    enabled: yes
+  workflow-aggregator:
+     version: "2.5"
 
 jenkins_plugins_state: present
 jenkins_plugin_updates_expiration: 86400
