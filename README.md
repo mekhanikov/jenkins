@@ -10,3 +10,5 @@ apt-get install -y ansible
 ```
 sudo ansible-playbook ansible/cd.yml -c local -v
 ```
+
+sudo ansible-playbook cd.yml  -v -i prod
