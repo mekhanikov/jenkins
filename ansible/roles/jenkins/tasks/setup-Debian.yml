@@ -4,6 +4,7 @@
     name:
       - curl
       - apt-transport-https
+      - git
     state: installed
 
 - name: Add Jenkins apt repository key.
