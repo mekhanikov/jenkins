@@ -39,7 +39,7 @@ jobs:
 
 # Optional method of pinning a specific version of Jenkins and/or overriding the
 # default Jenkins packaging URL.
-jenkins_version: "2.82"
+jenkins_version: "2.95"
 # jenkins_pkg_url: "https://www.example.com"
 
 # Change this to `latest` to update Jenkins if a newer version is available.
@@ -63,6 +63,8 @@ jenkins_plugins:
     enabled: yes
   github:
     version: "1.28.0"
+  github-branch-source:
+    version: "2.3.0"
 #    enabled: yes
 #  github-branch-source:
 #    version: "2.2.3"
