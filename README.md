@@ -42,3 +42,19 @@ Jenkins GitHub integration
 4. "Additional actions" select in dropdown menu: "Convert login and password to token"
 5. Add GitHub Server and provide generated token to Credentials dropdown.
 6. Press "Re-register hooks for all jobs" button (should see "Called re-register hooks for 1 items").
+
+Jenkins GitHub integration:
+1 login to Jenkins
+2 Jenkins -> New Item
+3 Create "GitHub Organization" project
+4 with name "factorydirectparty"
+5 Go to project configurations
+6 "GitHub Organization" section
+7 Add credentials
+8 Select "factorydirectparty" (or Jenkins?)
+9 Provide login/pass for admin of the repo
+10 Press "Save" button.
+11 Go to GitHub, to project settings check Webhooks. 
+It should have:
+Payload URL: http://50.116.55.235:8080/github-webhook/
+Content type: application/json
