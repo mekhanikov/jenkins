@@ -63,3 +63,7 @@ It should have:
   select: 
   - Push
   - Pull request
+
+Now on each commit or Jenkins job will bw triggered automaticaly by GitHub.
+Jenkins will create Job per each branch automatically.
+Jenkins will send build statuses to GitHub, so statuses will be show for erach commit.
