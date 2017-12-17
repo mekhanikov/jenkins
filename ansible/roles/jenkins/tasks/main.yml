@@ -72,6 +72,6 @@
 # Update Jenkins and install configured plugins.
 - include: plugins.yml
 
-- include: ssh.yml
-  become: true
-  tags: [jenkins, jenkins-ssh]
+#- include: ssh.yml
+#  become: true
+#  tags: [jenkins, jenkins-ssh]

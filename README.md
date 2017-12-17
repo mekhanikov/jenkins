@@ -56,5 +56,10 @@ Jenkins GitHub integration:
 10 Press "Save" button.
 11 Go to GitHub, to project settings check Webhooks. 
 It should have:
-Payload URL: http://50.116.55.235:8080/github-webhook/
-Content type: application/json
+- Payload URL: http://50.116.55.235:8080/github-webhook/
+- Content type: application/json
+- Which events would you like to trigger this webhook?
+  tick "Let me select individual events."
+  select: 
+  - Push
+  - Pull request
