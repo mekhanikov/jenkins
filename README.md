@@ -12,7 +12,7 @@ sudo ansible-playbook ansible/cd.yml -c local -v -i "localhost,"
 ```
 cd ansible/
 sudo ansible-playbook cd.yml  -v -i prod
-
+ansible-playbook playbook.yml -v -i lxctest
 
 https://github.com/factorydirectparty/Shoportunity.git
 emekhanikov@thumbtack.net
