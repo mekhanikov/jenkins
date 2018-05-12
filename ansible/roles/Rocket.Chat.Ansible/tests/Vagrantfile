@@ -1,0 +1,108 @@
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'.freeze
+TYPE_NAME = 'RocketChat'.freeze
+MEM_SIZE = 1024
+LV_CPU_MODE = 'host-passthrough'.freeze
+ANSIBLE_GROUP_NAME = 'chat_servers'.freeze
+SHARED_FOLDER_DISABLED = true
+
+Vagrant.configure('2') do |config|
+  config.ssh.insert_key = false
+  config.ssh.username = 'vagrant'
+  # Since we're provisioning with ansible through the network stack
+  # don't bother sharing folders.
+  config.vm.synced_folder '.', '/vagrant', disabled: SHARED_FOLDER_DISABLED
+
+  def do_ansible(box, box_props, name)
+    box.vm.provision 'ansible' do |ansible|
+      ansible.groups = { ANSIBLE_GROUP_NAME => name }
+      unless box_props['extra_vars'].nil? || box_props['extra_vars'].empty?
+        ansible.extra_vars = box_props['extra_vars']
+      end
+      ansible.become = true
+      ansible.playbook = 'provision.yml'
+      ansible.raw_arguments = '-vv'
+    end
+  end
+
+  # Define here the different box properties
+  # Ports are computed by id + 4000/4430
+  boxes = {
+    'debian8' => {
+      'id'            => 0,
+      'atlas_name'    => 'debian/jessie64'
+    },
+    'debian9' => {
+      'id'            => 1,
+      'atlas_name'    => 'debian/stretch64'
+    },
+    'ubuntu16' => {
+      'id'            => 2,
+      'atlas_name'    => 'generic/ubuntu1604',
+      'extra_vars'    => {
+        'ansible_python_interpreter': '/usr/bin/python3'
+      }
+    },
+    'ubuntu18' => {
+      'id'            => 3,
+      'atlas_name'    => 'generic/ubuntu1804',
+      'extra_vars'    => {
+        'ansible_python_interpreter': '/usr/bin/python3'
+      }
+    },
+    'centos7' => {
+      'id'            => 4,
+      'atlas_name'    => 'centos/7'
+    },
+    'fedora27' => {
+      'id'            => 5,
+      'atlas_name'    => 'fedora/27-cloud-base',
+      'extra_vars'    => {
+        'ansible_python_interpreter': '/usr/bin/python3'
+      }
+    }
+  }
+
+  boxes.each do |name, box_props|
+    network_args = {
+      priv_net: {
+        ip: "192.168.60.#{100 + box_props['id']}"
+      },
+      # Don't iterate the port because we want it to remain the same
+      fwd_pt_http: {
+        guest: 3000,
+        host: 4000 + box_props['id']
+      },
+      fwd_pt_https: {
+        guest: 443,
+        host: 4430 + box_props['id']
+      }
+    }
+
+    # Bug: https://bugzilla.redhat.com/show_bug.cgi?id=1381537
+    name == 'ubuntu16' && network_args[:priv_net][:auto_config] = false
+
+    config.vm.define name do |machine|
+      machine.vm.provider :virtualbox do |vb, override|
+        vb.customize ['modifyvm', :id, '--memory', MEM_SIZE.to_s]
+        vb.name = name + '-' + TYPE_NAME
+        do_ansible(override, box_props, name)
+      end
+
+      machine.vm.provider :libvirt do |lv, override|
+        lv.default_prefix = TYPE_NAME
+        lv.memory = MEM_SIZE
+        lv.cpu_mode = LV_CPU_MODE
+        # Override atlas_name with lv_atlas_name if it exists as a way to
+        # set different boxes for libvirt's provider.
+        override.vm.box = box_props['lv_atlas_name'] || box_props['atlas_name']
+        do_ansible(override, box_props, name)
+      end
+
+      machine.vm.box = box_props['atlas_name']
+      machine.vm.hostname = name + '.dev'
+      machine.vm.network :private_network, network_args[:priv_net]
+      machine.vm.network :forwarded_port, network_args[:fwd_pt_http]
+      machine.vm.network :forwarded_port, network_args[:fwd_pt_https]
+    end
+  end
+end

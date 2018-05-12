@@ -1,0 +1,64 @@
+---
+# defaults/main.yml: Defaults for RocketChat.Ansible
+rocket_chat_automatic_upgrades: false
+rocket_chat_upgrade_backup: true
+rocket_chat_upgrade_backup_path: "{{ rocket_chat_application_path }}"
+rocket_chat_application_path: /var/lib/rocket.chat
+# "latest" implies latest stable here, can be "0.61.2", for example
+rocket_chat_version: latest
+rocket_chat_tarball_remote: https://releases.rocket.chat/{{ rocket_chat_version }}/download
+rocket_chat_tarball_asc_remote:  https://releases.rocket.chat/{{ rocket_chat_version }}/asc
+# Using the sha256sum is deprecated in favor of GPG verifying
+rocket_chat_tarball_sha256sum: 0
+rocket_chat_tarball_gpg_key: 0E163286C20D07B9787EBE9FD7F9D0414FD08104
+rocket_chat_tarball_gpg_keyserver: ha.pool.sks-keyservers.net
+rocket_chat_tarball_check_checksum: false
+rocket_Chat_tarball_check_pgp: true
+rocket_chat_tarball_fetch_timeout: 100
+rocket_chat_tarball_validate_remote_cert: true
+rocket_chat_pgp_command: gpg2
+rocket_chat_service_user: rocketchat
+rocket_chat_service_group: rocketchat
+rocket_chat_service_host: "{{ ansible_fqdn }}"
+rocket_chat_service_port: 3000
+rocket_chat_service_environment: {}
+rocket_chat_node_version: 8.9.4
+rocket_chat_node_prefix: /usr/local/n/versions/node/{{ rocket_chat_node_version }}
+rocket_chat_node_path: "{{ rocket_chat_node_prefix }}/bin/node"
+rocket_chat_npm_version: 5.6.0
+rocket_chat_npm_path: "{{ rocket_chat_node_prefix }}/bin/npm"
+rocket_chat_npm_dist: /usr/bin/npm
+
+# MongoDB settings
+rocket_chat_mongodb_packages: mongodb
+rocket_chat_include_mongodb: true
+rocket_chat_mongodb_keyserver: hkp://keyserver.ubuntu.com:80
+rocket_chat_mongodb_gpg_key: EA312927
+rocket_chat_mongodb_server: 127.0.0.1
+rocket_chat_mongodb_port: 27017
+rocket_chat_mongodb_config_template: mongod.conf.j2
+
+# nginx settings
+rocket_chat_include_nginx: true
+rocket_chat_ssl_generate_certs: true
+rocket_chat_ssl_key_path: /etc/nginx/rocket_chat.key
+rocket_chat_ssl_cert_path: /etc/nginx/rocket_chat.crt
+rocket_chat_ssl_deploy_data: false
+rocket_chat_ssl_key_file: ~
+rocket_chat_ssl_cert_file: ~
+rocket_chat_nginx_enable_pfs: true
+rocket_chat_nginx_generate_pfs_key: true
+rocket_chat_nginx_pfs_key_numbits: 2048
+rocket_chat_nginx_pfs_key_path: /etc/nginx/rocket_chat.pem
+rocket_chat_nginx_pfs_file: ~
+
+# letsencrypt settings
+rocket_chat_include_letsencrypt: false
+rocket_chat_letsencrypt_email: ~
+rocket_chat_letsencrypt_account_key: /etc/nginx/acme-tiny_account.key
+rocket_chat_letsencrypt_csr: /etc/nginx/acme-tiny_{{ rocket_chat_service_host }}.csr
+rocket_chat_letsencrypt_domain: "{{ rocket_chat_service_host }}"
+rocket_chat_letsencrypt_acmetiny_path: /opt/acme-tiny
+rocket_chat_letsencrypt_wellknown_path: /var/www/letsencrypt
+rocket_chat_letsencrypt_ca_cert: https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem
+rocket_chat_letsencrypt_force_renew: false
