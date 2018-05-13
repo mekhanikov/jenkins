@@ -1,0 +1,183 @@
+# {{ ansible_managed }}
+
+[Global]
+AdminInfo1 = {{ ngircd_global_admininfo1 }}
+AdminInfo2 = {{ ngircd_global_admininfo2 }}
+AdminEMail = {{ ngircd_global_adminemail }}
+HelpFile = {{ ngircd_global_helpfile }}
+Info = {{ ngircd_global_info }}
+Listen = {{ ngircd_global_listen if ngircd_global_listen is string else ngircd_global_listen|join(',') }}
+{% if ngircd_global_motdfile is defined %}
+MotdFile = /etc/ngircd.motd
+{% endif %}
+{% if ngircd_global_motdphrase is defined %}
+MotdPhrase = {{ ngircd_global_motdphrase }}
+{% endif %}
+Name = {{ ngircd_global_name }}
+Network = {{ ngircd_global_network }}
+{% if ngircd_global_password is defined %}
+Password = {{ ngircd_global_password }}
+{% endif %}
+PidFile = {{ ngircd_global_pidfile }}
+{% if ngircd_global_ports is defined %}
+Ports = {{ ngircd_global_ports|join(', ') if ngircd_global_ports is iterable else ngircd_global_ports }}
+{% endif %}
+ServerGID = {{ ngircd_global_servergid }}
+ServerUID = {{ ngircd_global_serveruid }}
+
+[Limits]
+ConnectRetry = {{ ngircd_limits_connectretry }}
+IdleTimeout = {{ ngircd_limits_idletimeout }}
+MaxConnections = {{ ngircd_limits_maxconnections }}
+MaxConnectionsIP = {{ ngircd_limits_maxconnectionsip }}
+MaxJoins = {{ ngircd_limits_maxjoins }}
+MaxNickLength = {{ ngircd_limits_maxnicklength }}
+MaxListSize = {{ ngircd_limits_maxlistsize }}
+PingTimeout = {{ ngircd_limits_pingtimeout }}
+PongTimeout = {{ ngircd_limits_pongtimeout }}
+
+[Options]
+AllowedChannelTypes = {{ ngircd_options_allowedchanneltypes }}
+AllowRemoteOper = {{ 'yes' if ngircd_options_allowremoteoper else 'no' }}
+{% if ngircd_options_chrootdir is defined %}
+ChrootDir = {{ ngircd_options_chrootdir }}
+{% endif %}
+{% if ngircd_options_cloakhost is defined %}
+CloakHost = {{ ngircd_options_cloakhost }}
+{% endif %}
+{% if ngircd_options_cloakhostmodex is defined %}
+CloakHostModeX = {{ ngircd_options_cloakhostmodex }}
+{% endif %}
+{% if ngircd_options_cloakhostsalt is defined %}
+CloakHostSalt = {{ ngircd_options_cloakhostsalt }}
+{% endif %}
+{% if ngircd_options_cloakusertonick is defined %}
+CloakUserToNick = {{ 'yes' if ngircd_options_cloakusertonick else 'no' }}
+{% endif %}
+ConnectIPv6 = {{ 'yes' if ngircd_options_connectipv6 else 'no' }}
+ConnectIPv4 = {{ 'yes' if ngircd_options_connectipv4 else 'no' }}
+DefaultUserModes = {{ ngircd_options_defaultusermodes }}
+DNS = {{ 'yes' if ngircd_options_dns else 'no' }}
+Ident = {{ 'yes' if ngircd_options_ident else 'no' }}
+{% if ngircd_options_includedir is defined %}
+IncludeDir = {{ ngircd_options_includedir }}
+{% endif %}
+MorePrivacy = {{ 'yes' if ngircd_options_moreprivacy else 'no' }}
+NoticeBeforeRegistration = {{ 'yes' if ngircd_options_noticebeforeregistration else 'no' }}
+OperCanUseMode = {{ 'yes' if ngircd_options_opercanusemode else 'no' }}
+OperChanPAutoOp = {{ 'yes' if ngircd_options_operchanpautoop else 'no' }}
+OperServerMode = {{ 'yes' if ngircd_options_operservermode else 'no' }}
+PAM = {{ 'yes' if ngircd_options_pam else 'no' }}
+PAMIsOptional = {{ 'yes' if ngircd_options_pamisoptional else 'no' }}
+RequireAuthPing = {{ 'yes' if ngircd_options_requireauthping else 'no' }}
+ScrubCTCP = {{ 'yes' if ngircd_options_scrubctcp else 'no' }}
+SyslogFacility = {{ ngircd_options_syslogfacility }}
+{% if ngircd_options_webircpassword is defined %}
+WebircPassword = {{ ngircd_options_webircpassword }}
+{% endif %}
+
+{% if ngircd_ssl is defined and ngircd_ssl %}
+[SSL]
+{%   if ngircd_ssl_certfile is defined %}
+CertFile = {{ ngircd_ssl_certfile }}
+{%   endif %}
+{%   if ngircd_ssl_cipherlist is defined %}
+CipherList = {{ ngircd_ssl_cipherlist }}
+{%   endif %}
+{%   if ngircd_ssl_dhfile is defined %}
+DHFile = {{ ngircd_ssl_dhfile }}
+{%   endif %}
+{%   if ngircd_ssl_keyfile is defined %}
+KeyFile = {{ ngircd_ssl_keyfile }}
+{%   endif %}
+{%   if ngircd_ssl_keyfilepassword is defined %}
+KeyFilePassword = {{ ngircd_ssl_keyfilepassword }}
+{%   endif %}
+{%   if ngircd_ssl_ports is defined %}
+Ports = {{ ngircd_ssl_ports|join(', ') if ngircd_ssl_ports is iterable else ngircd_ssl_ports }}
+{%   endif %}
+{% endif %}
+
+{% if ngircd_channels is defined %}
+{%   for channel in ngircd_channels %}
+[Channel]
+{%     if channel.key is defined %}
+Key = {{ channel.key }}
+{%     endif %}
+{%     if channel.keyfile is defined %}
+KeyFile = {{ channel.keyfile }}
+{%     endif %}
+{%     if channel.maxusers is defined %}
+MaxUsers = {{ channel.maxusers }}
+{%     endif %}
+{%     if channel.modes is defined %}
+Modes = {{ channel.modes }}
+{%     endif %}
+{%     if channel.name is defined %}
+Name = {{ channel.name }}
+{%     endif %}
+{%     if channel.topic is defined %}
+Topic = {{ channel.topic }}
+{%     endif %}
+{%     if not loop.last %}
+
+{%     endif %}
+{%   endfor %}
+{% endif %}
+
+{% if ngircd_operators is defined %}
+{%   for operator in ngircd_operators %}
+[Operator]
+{%     if operator.name is defined %}
+Name = {{ operator.name }}
+{%     endif %}
+{%     if operator.password is defined %}
+Password = {{ operator.password }}
+{%     endif %}
+{%     if operator.mask is defined %}
+Mask = {{ operator.mask }}
+{%     endif %}
+{%     if not loop.last %}
+
+{%     endif %}
+{%   endfor %}
+{% endif %}
+
+{% if ngircd_servers is defined %}
+{%   for key in ngircd_servers.keys()|sort %}
+{%     if key != ansible_hostname %}
+[Server]
+{%       if ngircd_servers[key].bind is defined %}
+Bind = {{ ngircd_servers[key].bind }}
+{%       endif %}
+{%       if ngircd_servers[key].group is defined %}
+Group = {{ ngircd_servers[key].group }}
+{%       endif %}
+{%       if ngircd_servers[key].host is defined %}
+Host = {{ ngircd_servers[key].host }}
+{%       endif %}
+{%       if ngircd_servers[ansible_hostname].mypassword is defined %}
+MyPassword = {{ ngircd_servers[ansible_hostname].mypassword }}
+{%       endif %}
+{%       if ngircd_servers[key].name is defined %}
+Name = {{ ngircd_servers[key].name }}
+{%       endif %}
+{%       if ngircd_servers[key].passive is defined %}
+Passive = {{ 'yes' if ngircd_servers[key].passive else 'no' }}
+{%       endif %}
+{%       if ngircd_servers[key].mypassword is defined %}
+PeerPassword = {{ ngircd_servers[key].mypassword }}
+{%       endif %}
+{%       if ngircd_servers[key].port is defined %}
+Port = {{ ngircd_servers[key].port }}
+{%       endif %}
+{%       if ngircd_servers[key].servicemask is defined %}
+ServiceMask = {{ ngircd_servers[key].servicemask }}
+{%       endif %}
+{%       if ngircd_servers[key].sslconnect is defined %}
+SSLConnect = {{ 'yes' if ngircd_servers[key].sslconnect else 'no' }}
+{%       endif %}
+
+{%     endif %}
+{%   endfor %}
+{% endif %}
