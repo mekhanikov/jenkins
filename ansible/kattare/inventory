@@ -1,7 +1,0 @@
-[all:vars]
-ansible_connection=ssh
-ansible_ssh_user=christopherbalz
-ansible_ssh_pass=thundercl0uD1
-
-[server]
-treelssogic-swe.com
