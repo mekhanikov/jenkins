@@ -4,8 +4,8 @@ port = 20000;
 client_side_ssl = false;
 client_side_ssl_pem = "/home/christopherbalz/service/bip/bip.pem";
 log_level = 3;
-pid_file="/home/christopherbalz/service/bip/bip.pid";
-log_root = "/home/christopherbalz/service/bip/log";
+pid_file="/var/run/bip.pid";
+log_root = "/var/log/bip";
 
 log_sync_interval = 5;
 backlog = true;
@@ -20,7 +20,7 @@ backlog_reset_on_talk = false;
 network {
   name = "tlswe";
   ssl = false;
-  server { host = "treelogic-swe.com"; port = 6667; };
+  server { host = "127.0.0.1"; port = 6667; };
 };
 
 # Users/channels
@@ -57,12 +57,12 @@ user {
 };
 
 user {
-  name = "emekhanikov";
+  name = "emek";
   password = "2fbe99fde6835011e8be7cec30dfcb2143b07141";
   ssl_check_mode = "none";
-  default_nick = "emekhanikov";
-  default_user = "emekhanikov";
-  default_realname = "emekhanikov";
+  default_nick = "emek";
+  default_user = "emek";
+  default_realname = "emek";
   connection {
     name = "tlswe";
     network = "tlswe";

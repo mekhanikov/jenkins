@@ -40,6 +40,12 @@
     - ngircd_global_motdfile is defined
     - ngircd_yum|success
 
+- file:
+    path: /var/run/ngircd
+    state: directory
+    mode: 0777
+
+
 - name: Ensure that ngircd is started and enabled on boot
   tags: ngircd
   become: true
@@ -106,7 +112,9 @@
   command: bash -c "cat /var/run/bip.pid | xargs kill -9 || true"
 
 - name: Remove bip pid file.
-  command: rm -rf /var/run/bip.pid
+  file:
+    path: /var/run/bip.pid
+    state: absent
 
 - name: Run bip.
   command: bip -f /home/vagrant/.bip/bip.conf
