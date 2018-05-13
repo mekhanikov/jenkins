@@ -17,7 +17,7 @@
   become: true
   template:
     src: ngircd.conf.j2
-    dest: /etc/ngircd.conf
+    dest: /etc/ngircd/ngircd.conf
     owner: root
     group: ngircd
     mode: 0660
@@ -82,6 +82,11 @@
 #  args:
 #    chdir: /srv/checkout
 
+- file:
+    path: /home/vagrant/.bip
+    state: directory
+    mode: 0755
+
 - name: Attempting to overlay bip configuration
   tags: ngircd
 #  become: true
@@ -95,6 +100,13 @@
 #  register: ngircd_template
 #  when:
 #    - ngircd_yum|success
+
+- name: Stop bip.
+  become: true
+  command: bash -c "cat /var/run/bip.pid | xargs kill -9 || true"
+
+- name: Remove bip pid file.
+  command: rm -rf /var/run/bip.pid
 
 - name: Run bip.
   command: bip -f /home/vagrant/.bip/bip.conf
