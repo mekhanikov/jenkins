@@ -50,4 +50,54 @@
   when:
     - ngircd_template|success
     - ngircd_yum|success
+
+- name: Ensure that the bip package is installed
+  tags: ngircd
+  become: true
+  apt:
+    name: bip
+    state: present
+
+#- name: Ensure that the git package is installed
+#  tags: ngircd
+#  become: true
+#  apt:
+#    name: git
+#    state: present
+
+#- name: Install bip dependencies.
+#  apt: name={{ item }} state=present
+#  with_items:
+#    - make
+#    - gcc
+
+#
+#- git:
+#    repo: 'https://github.com/zwily/bip.git'
+#    dest: /srv/checkout
+#    version: master
+#
+#- name: Build bip.
+#  command: ./configure --enable-oidentd && make
+#  args:
+#    chdir: /srv/checkout
+
+- name: Attempting to overlay bip configuration
+  tags: ngircd
+#  become: true
+  template:
+    src: bip.conf.j2
+    dest: /home/vagrant/.bip/bip.conf
+    owner: vagrant
+    group: vagrant
+    mode: 0660
+#  notify: restart ngircd
+#  register: ngircd_template
+#  when:
+#    - ngircd_yum|success
+
+- name: Run bip.
+  command: bip -f /home/vagrant/.bip/bip.conf
+#  args:
+#    chdir: /srv/checkout
 ...

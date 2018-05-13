@@ -1,0 +1,459 @@
+
+ip = "0.0.0.0";
+port = 20000;
+client_side_ssl = false;
+client_side_ssl_pem = "/home/christopherbalz/service/bip/bip.pem";
+log_level = 3;
+pid_file="/home/christopherbalz/service/bip/bip.pid";
+log_root = "/home/christopherbalz/service/bip/log";
+
+log_sync_interval = 5;
+backlog = true;
+backlog_lines = 30;
+backlog_always = true;
+backlog_msg_only = true;
+blreset_on_talk = true;
+backlog_reset_on_talk = false;
+
+
+# Networks
+network {
+  name = "tlswe";
+  ssl = false;
+  server { host = "treelogic-swe.com"; port = 6667; };
+};
+
+# Users/channels
+user {
+  name = "cbalz";
+  password = "2ed98409563e4e5a14b515cf2db1bcb4257d3798";
+  ssl_check_mode = "none";
+  default_nick = "cbalz";
+  default_user = "cbalz";
+  default_realname = "cbalz";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "xma";
+  password = "1352b565e37d5917bba734e47e06ed8e6331b279";
+  ssl_check_mode = "none";
+  default_nick = "xma";
+  default_user = "xma";
+  default_realname = "xma";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "emekhanikov";
+  password = "2fbe99fde6835011e8be7cec30dfcb2143b07141";
+  ssl_check_mode = "none";
+  default_nick = "emekhanikov";
+  default_user = "emekhanikov";
+  default_realname = "emekhanikov";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+
+user {
+  name = "jscrivner";
+  password = "67a8136f8eb6f2727436e5a2b02b6eef34723b53";
+  ssl_check_mode = "none";
+  default_nick = "jscrivner";
+  default_user = "jscrivner";
+  default_realname = "jscrivner";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "fswilling";
+  password = "3e6f609864454b34c929b2a3baf870182cebc01d";
+  ssl_check_mode = "none";
+  default_nick = "fswilling";
+  default_user = "fswilling";
+  default_realname = "fswilling";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "ehaight";
+  password = "373398c788de00399ceb40f8b728da92704eddb3";
+  ssl_check_mode = "none";
+  default_nick = "ehaight";
+  default_user = "ehaight";
+  default_realname = "ehaight";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "zshen";
+  password = "79a28aee3bea3ec9f559b38e8d83dfd7efab1426";
+  ssl_check_mode = "none";
+  default_nick = "zshen";
+  default_user = "zshen";
+  default_realname = "zshen";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "mstellar";
+  password = "3f4dff76e7defea2b4b5562407c442a4370065ba";
+  ssl_check_mode = "none";
+  default_nick = "mstellar";
+  default_user = "mstellar";
+  default_realname = "mstellar";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+#user {
+#        name = "supybot";
+#        password = "5b33bfdf60e8feb01c83d340b1b38f7c8676dc50";
+#        ssl_check_mode = "none";
+#        default_nick = "supybot";
+#        default_user = "supybot";
+#        default_realname = "supybot";
+#        connection {
+#                name = "tlswe";
+#                network = "tlswe";
+#                ignore_first_nick = true;
+#                no_client_away_msg = "currently disconnected";
+#                channel { name = "#fluffy"; };
+#        };
+#};
+
+user {
+  name = "ylu";
+  password = "602f1805d491c356308b389513175fbddeca6013";
+  ssl_check_mode = "none";
+  default_nick = "ylu";
+  default_user = "ylu";
+  default_realname = "ylu";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "jwang";
+  password = "73c2605883e5369f55a932f88a61662dfae536a4";
+  ssl_check_mode = "none";
+  default_nick = "jwang";
+  default_user = "jwang";
+  default_realname = "jwang";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "_log_bot0";
+  password = "617c3cd65020412ddbda2af97ab706b0d9af2573";
+  ssl_check_mode = "none";
+  default_nick = "_log_bot0";
+  default_user = "_log_bot0";
+  default_realname = "_log_bot0";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "musicglenn";
+  password = "4acd52ecfe59fe17b9024fe439dda26fc196501e";
+  ssl_check_mode = "none";
+  default_nick = "musicglenn";
+  default_user = "musicglenn";
+  default_realname = "musicglenn";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "hlu";
+  password = "46f45a36edcbfff2fa673354d5b0db0704bb3295";
+  ssl_check_mode = "none";
+  default_nick = "hlu";
+  default_user = "hlu";
+  default_realname = "hlu";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "niki";
+  password = "3bff1f3fa2f7bccd6c48cbe2afbbea9128f558e5";
+  ssl_check_mode = "none";
+  default_nick = "niki";
+  default_user = "niki";
+  default_realname = "niki";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "_jenkins_bot0";
+  password = "3abf6e20d6fead3da3d5d0ac13f1119352be0a89";
+  ssl_check_mode = "none";
+  default_nick = "_jenkins_bot0";
+  default_user = "_jenkins_bot0";
+  default_realname = "_jenkins_bot0";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "vjogi";
+  password = "358d9ec0ff8471448be770268eed849cbf4821c3";
+  ssl_check_mode = "none";
+  default_nick = "vjogi";
+  default_user = "vjogi";
+  default_realname = "vjogi";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "mashara";
+  password = "4b73740e1dc5de3c9dc43d87905fb58530685006";
+  ssl_check_mode = "none";
+  default_nick = "mashara";
+  default_user = "mashara";
+  default_realname = "mashara";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "rprasad";
+  password = "389cf18c1575bd4e7523abda9882f0f62d709f9f";
+  ssl_check_mode = "none";
+  default_nick = "rprasad";
+  default_user = "rprasad";
+  default_realname = "rprasad";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "gmixaz";
+  password = "4faa5fe5b00d51fc27e3714ae676d1a16ffc88cf";
+  ssl_check_mode = "none";
+  default_nick = "gmixaz";
+  default_user = "gmixaz";
+  default_realname = "gmixaz";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "dki";
+  password = "0561e7d7c41c578400a653c4de0ca9dd0b88173a";
+  ssl_check_mode = "none";
+  default_nick = "dki";
+  default_user = "dki";
+  default_realname = "dki";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "jbasarte";
+  password = "51cce383270b4961c91e85bea3e39ce95fa7ae38";
+  ssl_check_mode = "none";
+  default_nick = "jbasarte";
+  default_user = "jbasarte";
+  default_realname = "jbasarte";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "zkareem";
+  password = "18a456c264bb191a15a1a0a37f3f563611f03e52";
+  ssl_check_mode = "none";
+  default_nick = "zkareem";
+  default_user = "zkareem";
+  default_realname = "zkareem";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "norr";
+  password = "1880c6e7920d150a888bd6db26709866538c97b5";
+  ssl_check_mode = "none";
+  default_nick = "norr";
+  default_user = "norr";
+  default_realname = "norr";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "jfonseca";
+  password = "53b8f2a5284838bab1504789fbf3c8477046677f";
+  ssl_check_mode = "none";
+  default_nick = "jfonseca";
+  default_user = "jfonseca";
+  default_realname = "jfonseca";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "smatyk";
+  password = "6725c39a50f20a2b49712eebe98cd902e05cabd3";
+  ssl_check_mode = "none";
+  default_nick = "smatyk";
+  default_user = "smatyk";
+  default_realname = "smatyk";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
+user {
+  name = "mfrieze";
+  password = "7e1ac28ec00accea525e07c39274eab31ae6579b";
+  ssl_check_mode = "none";
+  default_nick = "mfrieze";
+  default_user = "mfrieze";
+  default_realname = "mfrieze";
+  connection {
+    name = "tlswe";
+    network = "tlswe";
+    ignore_first_nick = true;
+    no_client_away_msg = "currently disconnected";
+    channel { name = "#fluffy"; };
+  };
+};
+
