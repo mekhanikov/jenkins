@@ -1,6 +1,5 @@
 ---
-dependencies:
-  - linuxhq.epel
+dependencies: []
 galaxy_info:
   author: tkimball83
   description: RHEL/CentOS - Next Generation IRC Daemon

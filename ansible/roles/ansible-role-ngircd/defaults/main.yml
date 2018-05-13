@@ -5,7 +5,7 @@ ngircd_global_admininfo1: ngircd
 ngircd_global_admininfo2: localhost
 ngircd_global_helpfile: /usr/share/doc/ngircd/Commands.txt
 ngircd_global_info: localhost
-ngircd_global_listen: 0.0.0.0
+ngircd_global_listen: 127.0.0.1,192.168.0.1
 ngircd_global_name: localhost
 ngircd_global_network: localnet
 ngircd_global_pidfile: /var/run/ngircd/ngircd.pid
@@ -38,6 +38,6 @@ ngircd_options_pamisoptional: false
 ngircd_options_requireauthping: false
 ngircd_options_scrubctcp: false
 ngircd_options_syslogfacility: local5
-ngircd_servers: []
+#ngircd_servers: []
 ngircd_ssl: false
 ...

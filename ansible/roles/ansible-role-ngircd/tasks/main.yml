@@ -2,11 +2,15 @@
 - name: Ensure that the ngircd package is installed
   tags: ngircd
   become: true
-  yum:
-    enablerepo: epel
+  apt:
     name: ngircd
     state: present
   register: ngircd_yum
+
+- name: Ensure group "ngircd" exists
+  group:
+    name: ngircd
+    state: present
 
 - name: Attempting to overlay ngircd configuration
   tags: ngircd
