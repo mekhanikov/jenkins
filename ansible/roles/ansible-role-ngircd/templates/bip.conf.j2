@@ -1,11 +1,11 @@
 
 ip = "0.0.0.0";
 port = 20000;
-client_side_ssl = false;
-client_side_ssl_pem = "/home/christopherbalz/service/bip/bip.pem";
+client_side_ssl = true;
+client_side_ssl_pem = "/home/christopherbalz/service/ssl_files_2016/bip.pem";
 log_level = 3;
-pid_file="/var/run/bip.pid";
-log_root = "/var/log/bip";
+pid_file="/home/christopherbalz/service/bip/bip.pid";
+log_root = "/home/christopherbalz/service/bip/log";
 
 log_sync_interval = 5;
 backlog = true;
@@ -18,9 +18,9 @@ backlog_reset_on_talk = false;
 
 # Networks
 network {
-  name = "tlswe";
-  ssl = false;
-  server { host = "127.0.0.1"; port = 6667; };
+        name = "tlswe";
+        ssl = true;
+        server { host = "treelogic-swe.com"; port = 20001; };
 };
 
 # Users/channels

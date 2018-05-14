@@ -41,6 +41,27 @@
     - ngircd_yum|success
 
 - file:
+    path: /home/christopherbalz/service/ssl_files_2016
+    state: directory
+    mode: 0777
+
+- file:
+    path: /home/christopherbalz/service/bip/log
+    state: directory
+    mode: 0777
+
+- name: Files are present
+  copy:
+    src: "{{ item }}"
+    dest: /home/christopherbalz/service/ssl_files_2016/{{ item }}
+    mode: 0600
+  with_items:
+    - ngircd_dhparam.pem
+    - treelogic-swe.com.crt
+    - treelogic-swe.com.key
+    - bip.pem
+
+- file:
     path: /var/run/ngircd
     state: directory
     mode: 0777
@@ -89,7 +110,7 @@
 #    chdir: /srv/checkout
 
 - file:
-    path: /home/vagrant/.bip
+    path: ~/service/bip
     state: directory
     mode: 0755
 
@@ -98,9 +119,9 @@
 #  become: true
   template:
     src: bip.conf.j2
-    dest: /home/vagrant/.bip/bip.conf
-    owner: vagrant
-    group: vagrant
+    dest: ~/service/bip/bip.conf
+#    owner: vagrant
+#    group: vagrant
     mode: 0660
 #  notify: restart ngircd
 #  register: ngircd_template
@@ -117,7 +138,7 @@
     state: absent
 
 - name: Run bip.
-  command: bip -f /home/vagrant/.bip/bip.conf
+  command: bip -f ~/service/bip/bip.conf
 #  args:
 #    chdir: /srv/checkout
 ...

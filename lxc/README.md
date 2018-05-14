@@ -68,3 +68,17 @@ irssi
 
 /connect  10.0.3.15 6667 root2 root3
 /quit
+
+irssi
+/connect  10.0.3.15 20000
+/QUOTE PASS emek:Yc6Aj2:tlswe
+/QUOTE PASS cbalz:M475Gd:tlswe
+
+/server add -net mynode 10.0.3.15 6697 emekhanikov:abcde
+
+sudo ngircd -n
+
+sudo bip -n -f /home/vagrant/.bip/bip.conf
+
+sudo systemctl status ngircd.service
+sudo journalctl -xe
