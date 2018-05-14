@@ -4,6 +4,34 @@
   vars:
     - openldap_base: 'dc=vagrant,dc=local'
     - pri_domain_name: vagrant.local
+    - rocket_chat_automatic_upgrades: true
+    - rocket_chat_include_nginx: false
+    - gitlab_ldap_enabled: "true"
+    - gitlab_ldap_host: "10.0.3.15"
+    - gitlab_ldap_port: "389"
+    - gitlab_ldap_uid: "sAMAccountName"
+    - gitlab_ldap_method: "plain"
+    - gitlab_ldap_bind_dn: "cn=admin,dc=vagrant,dc=local"
+    - gitlab_ldap_password: "P@55w0rd"
+    - gitlab_ldap_base: "dc=vagrant,dc=local"
+    - ngircd_global_name: treelogic-swe.com
+    - ngircd_global_info: treelogic-swe.com IRC Server
+    - ngircd_global_listen: 0.0.0.0
+#    - ngircd_ports:
+#            - 6667
+#    - ngircd_global_password: abcde
+    - ngircd_ssl: true
+    - ngircd_ssl_certfile: /home/christopherbalz/service/ssl_files_2016/treelogic-swe.com.crt
+    - ngircd_ssl_dhfile:  /home/christopherbalz/service/ssl_files_2016/ngircd_dhparam.pem
+    - ngircd_ssl_keyfile: /home/christopherbalz/service/ssl_files_2016/treelogic-swe.com.key
+    - ngircd_ssl_ports: 20001
+    - ngircd_channels:
+      - name: #fluffy
+      - topic: Here we talk about anything of Fluffy Cloud (a.k.a. propellerLabs)! Full message logs can be found on https://treelogic-swe.com/irc-log-bot/viewlog
+
   roles:
-    - role: ansible-etc-hosts
-    - role: ansible-openldap
+#    - role: ansible-etc-hosts
+#    - role: ansible-openldap
+#    - role: Rocket.Chat.Ansible
+#    - role: ansible-role-gitlab
+    - role: ansible-role-ngircd
