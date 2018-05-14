@@ -7,10 +7,10 @@
     state: present
   register: ngircd_yum
 
-- name: Ensure group "ngircd" exists
-  group:
-    name: ngircd
-    state: present
+#- name: Ensure group "ngircd" exists
+#  group:
+#    name: ngircd
+#    state: present
 
 - name: Attempting to overlay ngircd configuration
   tags: ngircd
@@ -18,8 +18,8 @@
   template:
     src: ngircd.conf.j2
     dest: /etc/ngircd/ngircd.conf
-    owner: root
-    group: ngircd
+    owner: irc
+    group: irc
     mode: 0660
   notify: restart ngircd
   register: ngircd_template
@@ -31,10 +31,10 @@
   become: true
   template:
     src: ngircd.motd.j2
-    dest: /etc/ngircd.motd
-    owner: root
-    group: ngircd
-    mode: 0660
+    dest: /etc/ngircd/ngircd.motd
+    owner: irc
+    group: irc
+    mode: 0777
   notify: restart ngircd
   when:
     - ngircd_global_motdfile is defined
@@ -60,6 +60,18 @@
     - treelogic-swe.com.crt
     - treelogic-swe.com.key
     - bip.pem
+
+- name: Files are present
+  copy:
+    src: Commands.txt
+    dest: /usr/share/doc/ngircd/Commands.txt
+    mode: 0777
+
+- name: Files are present
+  copy:
+    src: ngircd.motd
+    dest: /etc/ngircd/ngircd.motd
+    mode: 0777
 
 - file:
     path: /var/run/ngircd

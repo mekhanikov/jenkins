@@ -27,7 +27,7 @@
     - ngircd_ssl_ports: 20001
     - ngircd_channels:
       - name: #fluffy
-      - topic: Here we talk about anything of Fluffy Cloud (a.k.a. propellerLabs)! Full message logs can be found on https://treelogic-swe.com/irc-log-bot/viewlog
+        topic: Here we talk about anything of Fluffy Cloud (a.k.a. propellerLabs)! Full message logs can be found on https://treelogic-swe.com/irc-log-bot/viewlog
 
   roles:
 #    - role: ansible-etc-hosts
