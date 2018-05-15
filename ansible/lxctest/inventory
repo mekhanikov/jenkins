@@ -4,4 +4,4 @@ ansible_ssh_user=vagrant
 ansible_ssh_pass=vagrant
 
 [server]
-10.0.3.15
+10.0.3.16
