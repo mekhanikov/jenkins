@@ -62,8 +62,9 @@
     src: bip.pem
     dest: /home/christopherbalz/service/ssl_files_2016/bip.pem
     mode: 0600
-    owner: vagrant
-    group: vagrant
+#    become: false
+    owner: "{{ ansible_ssh_user }}"
+#    group: vagrant
 
 - name: Files are present
   copy:
@@ -132,11 +133,11 @@
 
 - name: Attempting to overlay bip configuration
   tags: ngircd
-#  become: false
+  become: false
   template:
     src: bip.conf.j2
     dest: /home/christopherbalz/service/bip/bip.conf
-    owner: vagrant
+#    owner: vagrant
 #    group: irc
     mode: 0660
 #  notify: restart ngircd
@@ -155,8 +156,6 @@
 
 - name: Run bip.
   command: bip -f /home/christopherbalz/service/bip/bip.conf
-  become: true
-  become_user: vagrant
-#  args:
-#    chdir: /srv/checkout
+  become: false
+
 ...
