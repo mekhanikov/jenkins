@@ -7,11 +7,6 @@
     state: present
   register: ngircd_yum
 
-#- name: Ensure group "ngircd" exists
-#  group:
-#    name: ngircd
-#    state: present
-
 - name: Attempting to overlay ngircd configuration
   tags: ngircd
   become: true
@@ -55,11 +50,20 @@
     src: "{{ item }}"
     dest: /home/christopherbalz/service/ssl_files_2016/{{ item }}
     mode: 0600
+    owner: irc
+    group: irc
   with_items:
     - ngircd_dhparam.pem
     - treelogic-swe.com.crt
     - treelogic-swe.com.key
-    - bip.pem
+
+- name: Files are present
+  copy:
+    src: bip.pem
+    dest: /home/christopherbalz/service/ssl_files_2016/bip.pem
+    mode: 0600
+    owner: vagrant
+    group: vagrant
 
 - name: Files are present
   copy:
@@ -128,12 +132,12 @@
 
 - name: Attempting to overlay bip configuration
   tags: ngircd
-#  become: true
+#  become: false
   template:
     src: bip.conf.j2
-    dest: ~/service/bip/bip.conf
-#    owner: vagrant
-#    group: vagrant
+    dest: /home/christopherbalz/service/bip/bip.conf
+    owner: vagrant
+#    group: irc
     mode: 0660
 #  notify: restart ngircd
 #  register: ngircd_template
@@ -146,11 +150,13 @@
 
 - name: Remove bip pid file.
   file:
-    path: /var/run/bip.pid
+    path: /home/christopherbalz/service/bip/bip.pid
     state: absent
 
 - name: Run bip.
-  command: bip -f ~/service/bip/bip.conf
+  command: bip -f /home/christopherbalz/service/bip/bip.conf
+  become: true
+  become_user: vagrant
 #  args:
 #    chdir: /srv/checkout
 ...
