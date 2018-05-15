@@ -33,5 +33,8 @@
 #    - role: ansible-etc-hosts
 #    - role: ansible-openldap
 #    - role: Rocket.Chat.Ansible
-#    - role: ansible-role-gitlab
-    - role: ansible-role-ngircd
+    - role: ansible-role-gitlab
+#    - role: ansible-role-ngircd
+#    - java
+#    - maven
+#    - jenkins
