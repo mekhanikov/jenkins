@@ -1,6 +1,6 @@
 ---
 # General config.
-gitlab_external_url: "https://gitlab/"
+gitlab_external_url: "https://treelogic-swe.com/"
 gitlab_git_data_dir: "/var/opt/gitlab/git-data"
 gitlab_edition: "gitlab-ce"
 gitlab_version: ''
@@ -32,6 +32,7 @@ gitlab_smtp_address: "smtp.server"
 gitlab_smtp_port: "465"
 gitlab_smtp_user_name: "smtp user"
 gitlab_smtp_password: "smtp password"
+
 gitlab_smtp_domain: "example.com"
 gitlab_smtp_authentication: "login"
 gitlab_smtp_enable_starttls_auto: "true"
