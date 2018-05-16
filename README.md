@@ -1,5 +1,21 @@
-This repo is used for exercises in the [Continuous Integration, Delivery or Deployment with Jenkins, Docker and Ansible](http://technologyconversations.com/2015/02/11/continuous-integration-delivery-or-deployment-with-jenkins-docker-and-ansible/) article
 
+# What is it?
+The project contains Ansible script for fully automated deployment of server with all required for development infrastructure.
+It deploys:
+- IRC server.
+- GitLab with existing projects.
+- Trac with all tickets.
+- Jenkins with all required jobs
+- SonarQube.
+- LDAP - to store access to GitLab, Trac, Jenkins and SonarQuibe in single place for easy user's management 
+(IRC has separate config because doesn't suppport LDAP).
+
+All services has fully configured access for developers.
+Service should have backup mechanism, all data should be stored outside on durable storage (e,g, Amazon S3).
+Backup data should be used by the Ansible script in case need to reprovision another machine.
+
+# How to use it?
+To run Ansible script on any machine you need to install Ansible on it:
 ```
 apt-get install -y software-properties-common
 apt-add-repository ppa:ansible/ansible
@@ -7,28 +23,46 @@ apt-get update
 apt-get install -y ansible
 ```
 
-```
-sudo ansible-playbook ansible/cd.yml -c local -v -i "localhost," 
-```
-cd ansible/
-sudo ansible-playbook cd.yml  -v -i prod
-ansible-playbook playbook.yml -v -i lxctest
+To deploy environment on Kattar, please create ansible/kattare/inventory file (similar to ansible/lxctest/inventory)
+but with server ssh-user user/password and url.
 
-https://github.com/factorydirectparty/Shoportunity.git
-emekhanikov@thumbtack.net
+Then you can run scripts:
+```
+cd ansible
+ansible-playbook playbook.yml -v -i kattare
+```
 
+# How to update/test it?
+It is useful to test script against some fresh machine with preinstalled particular Linux version.
+One of the way is ti use LXC container it allows to create very fast fresh instance of required Linux.
+lxc folder has Vagrant file to create container with Ubuntu 14.04 because we have it on Katare server.
+So need to install vagrant and lxc on developer's machine.
+1. To install vagrant it is better to take fresh version from https://www.vagrantup.com/downloads.html
+2. To install lxc
+```
+sudo apt-get update
+sudo apt-get install lxc
+```
+3. Install vagrant lxc-provider
+```
+vagrant plugin install vagrant-lxc
+```
+
+To create container and run Ansible scripts against it:
+
+```
+cd lxc
+vagrant up
+cd ../ansible
+ansible-playbook playbook.yml -v -i kattare
+```
+
+-----------------------
 sudo rm -rf /var/lib/jenkins/plugins
 ls -lah /var/lib/jenkins/plugins
 
 To login t Jenkins use admin/admin then change asap
 add new users
-
-TODO
-add credentials to jenkins store (my login / pass fo far, then key)
-
-ssh root@50.116.55.235
-4FDPjenkins
-
 
 ---
 Jenkins GitHub integration
@@ -67,3 +101,6 @@ It should have:
 Now on each commit or Jenkins job will bw triggered automaticaly by GitHub.
 Jenkins will create Job per each branch automatically.
 Jenkins will send build statuses to GitHub, so statuses will be show for erach commit.
+
+This repo is used for exercises in the [Continuous Integration, Delivery or Deployment with Jenkins, Docker and Ansible](http://technologyconversations.com/2015/02/11/continuous-integration-delivery-or-deployment-with-jenkins-docker-and-ansible/) article
+

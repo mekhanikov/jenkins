@@ -17,9 +17,6 @@
     - ngircd_global_name: treelogic-swe.com
     - ngircd_global_info: treelogic-swe.com IRC Server
     - ngircd_global_listen: 0.0.0.0
-#    - ngircd_ports:
-#            - 6667
-#    - ngircd_global_password: abcde
     - ngircd_ssl: true
     - ngircd_ssl_certfile: /home/christopherbalz/service/ssl_files_2016/treelogic-swe.com.crt
     - ngircd_ssl_dhfile:  /home/christopherbalz/service/ssl_files_2016/ngircd_dhparam.pem
