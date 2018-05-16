@@ -26,9 +26,6 @@
     dest: /tmp/gitlab_install_repository.sh
     validate_certs: "{{ gitlab_download_validate_certs }}"
   when: (gitlab_file.stat.exists == false)
-#  environment:
-#    http_proxy: http://139.162.182.113:80
-#    https_proxy: https://159.65.66.153:808
 
 - name: Install GitLab repository
   command: bash /tmp/gitlab_install_repository.sh
