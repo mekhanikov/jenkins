@@ -54,7 +54,7 @@ To create container and run Ansible scripts against it:
 cd lxc
 vagrant up
 cd ../ansible
-ansible-playbook playbook.yml -v -i kattare
+ansible-playbook playbook.yml -v -i lxctest
 ```
 
 -----------------------

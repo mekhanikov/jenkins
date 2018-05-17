@@ -11,6 +11,12 @@ openldap_debian_packages:
   - slapd
   - ldap-utils
   - phpldapadmin
+  - python-pip
+  - python-dev
+  - build-essential
+  - libsasl2-dev
+  - libldap2-dev
+  - libssl-dev
 openldap_organizationalunits:  #defines OU's to populate
   - users
   - groups
@@ -29,14 +35,6 @@ openldap_users:
     LastName: Balz
     ou: users  #defines OU name
     uidNum: 10000  #start user numbers at 10000 and up
-    gidNum: 5000  #defines gidNum from openldap_posixgroups
-    password: 'P@55w0rd'
-    loginShell: /bin/bash
-    homeDirectory: /home/cbalz
-  - FirstName: Chris
-    LastName: Balz
-    ou: users  #defines OU name
-    uidNum: 10001  #start user numbers at 10000 and up
     gidNum: 5000  #defines gidNum from openldap_posixgroups
     password: 'P@55w0rd'
     loginShell: /bin/bash

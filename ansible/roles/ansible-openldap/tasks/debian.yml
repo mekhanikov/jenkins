@@ -29,4 +29,10 @@
   apt:
     name: "{{ item }}"
     state: present
+    update_cache: yes
   with_items: "{{ openldap_debian_packages }}"
+
+
+# Required for Ansible ldap
+- pip:
+    name: python-ldap

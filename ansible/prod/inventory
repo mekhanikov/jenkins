@@ -1,8 +1,0 @@
-
-[all:vars]
-ansible_connection=ssh
-ansible_ssh_user=root
-ansible_ssh_pass=4FDPjenkins
-
-[server]
-50.116.55.235

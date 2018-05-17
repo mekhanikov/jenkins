@@ -28,10 +28,8 @@
   register: admin_password
 
 - name: config_openldap | restart slapd
-  systemd:
+  service:
     name: slapd
-    enabled: yes
-    daemon_reload: yes
     state: restarted
   when: >
     admin_password is defined and
@@ -43,3 +41,18 @@
   when: >
         openldap_populate is defined and
         openldap_populate
+
+- name: Make sure we have a parent entry for users
+  ldap_entry:
+    dn: cn=admin,dc=vagrant,dc=local
+    objectClass: organizationalUnit
+
+- name: Make sure we have an admin user
+  ldap_entry:
+    dn: cn=admin,dc=vagrant,dc=local
+    objectClass:
+      - simpleSecurityObject
+      - organizationalRole
+    attributes:
+      description: An LDAP administrator
+      userPassword: "{SSHA}tabyipcHzhwESzRaGA7oQ/SDoBZQOGND"
